@@ -1,15 +1,13 @@
 # 🚖 BidZi
 
-**BidZi** is a modern ride-hailing and bidding platform where **customers place bids first** and drivers respond with counter-offers in real time.
-This gives customers full control over pricing while ensuring fair earnings for drivers — all through a clean, intuitive Android interface.
+BidZi is a modern ride-hailing and bidding platform where customers place bids first, drivers respond with counter-offers, and users can even share rides or schedule future trips.
+This system gives customers flexibility, transparency, and control over pricing — all in a sleek Kotlin-based Android app.
 
----
+🧭 Overview
 
-## 🧭 Overview
-
-BidZi redefines the ride-booking experience by introducing a **customer-first bidding system**.
-Customers can set their preferred fare, view driver offers, and choose the best match based on price, rating, or proximity.
-This system ensures transparency, fairness, and flexibility for both riders and drivers.
+BidZi enhances the traditional ride-hailing experience with a bidding-based booking model.
+Customers can propose their fare, view driver offers, accept or negotiate, share rides with others, or schedule a trip in advance.
+It’s designed to be efficient, fair, and user-friendly for both customers and drivers.
 
 ---
 
