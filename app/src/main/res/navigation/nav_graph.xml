@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bidzi.app.HomeFragment"
+        android:label="Home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_availableRidesFragment"
+            app:destination="@id/availableRidesFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_scheduleRideFragment"
+            app:destination="@id/scheduleRideFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+
+        <!-- Updated action to navigate to the activity instead of the fragment -->
+        <action
+            android:id="@+id/action_homeFragment_to_rideRequestActivity"
+            app:destination="@id/rideRequestActivity" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/ridesFragment"
+        android:name="com.bidzi.app.RideHistoryFragment"
+        android:label="Rides" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.bidzi.app.ProfileFragment"
+        android:label="Profile" />
+
+    <!-- Removed ride request flow fragments -->
+
+    <fragment
+        android:id="@+id/trackDriverFragment"
+        android:name="com.bidzi.app.TrackDriverFragment"
+        android:label="TrackDriverFragment">
+
+        <argument
+            android:name="isShared"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+        <argument
+            android:name="driverData"
+            app:argType="com.bidzi.app.DriverData"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleRideFragment"
+        android:name="com.bidzi.app.ScheduleRideFragment"
+        android:label="ScheduleRideFragment" >
+        <action
+            android:id="@+id/action_scheduleRideFragment_to_routePreviewFragment"
+            app:destination="@id/routePreviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/availableRidesFragment"
+        android:name="com.bidzi.app.AvailableRidesFragment"
+        android:label="AvailableRidesFragment" />
+
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.bidzi.app.notification.NotificationsFragment"
+        android:label="NotificationsFragment" />
+
+    <!-- Added activity destination for the ride request flow -->
+    <activity
+        android:id="@+id/rideRequestActivity"
+        android:name="com.bidzi.app.activity.RideRequestActivity"
+        android:label="Request Ride" />
+
+
+
+
+    <fragment
+        android:id="@+id/routePreviewFragment"
+        android:name="com.bidzi.app.RoutePreviewFragment"
+        android:label="Route Preview"
+        tools:layout="@layout/fragment_route_preview">
+
+        <argument
+            android:name="pickupAddress"
+            app:argType="string" />
+        <argument
+            android:name="pickupLat"
+            app:argType="float" />
+        <argument
+            android:name="pickupLng"
+            app:argType="float" />
+        <argument
+            android:name="dropAddress"
+            app:argType="string" />
+        <argument
+            android:name="dropLat"
+            app:argType="float" />
+        <argument
+            android:name="dropLng"
+            app:argType="float" />
+    </fragment>
+
+</navigation>

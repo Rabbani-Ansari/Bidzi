@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_ride_request"
+    app:startDestination="@id/rideRequestFragment">
+
+    <fragment
+        android:id="@+id/rideRequestFragment"
+        android:name="com.bidzi.app.RideRequestFragment"
+        android:label="RideRequestFragment"
+        tools:layout="@layout/fragment_ride_request">
+
+        <action
+            android:id="@+id/action_rideRequestFragment_to_findingDriverFragment"
+            app:destination="@id/findingDriverFragment" />
+        <action
+            android:id="@+id/action_rideRequestFragment_to_routePreviewFragment"
+            app:destination="@id/routePreviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/findingDriverFragment"
+        android:name="com.bidzi.app.FindingDriverFragment"
+        android:label="FindingDriverFragment"
+        tools:layout="@layout/fragment_finding_driver">
+
+        <action
+            android:id="@+id/action_findingDriverFragment_to_availableDriversFragment"
+            app:destination="@id/availableDriversFragment"
+            app:popUpTo="@id/rideRequestFragment"
+            app:popUpToInclusive="true" />
+
+        <argument
+            android:name="rideBooking"
+            app:argType="com.bidzi.app.supabase.RideBooking" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/availableDriversFragment"
+        android:name="com.bidzi.app.AvailableDriversFragment"
+        android:label="Available Drivers"
+        tools:layout="@layout/fragment_available_drivers">
+
+        <argument
+            android:name="ride_booking"
+            app:argType="com.bidzi.app.supabase.RideBooking"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/routePreviewFragment"
+        android:name="com.bidzi.app.RoutePreviewFragment"
+        android:label="Route Preview"
+        tools:layout="@layout/fragment_route_preview">
+
+        <argument
+            android:name="pickupAddress"
+            app:argType="string" />
+        <argument
+            android:name="pickupLat"
+            app:argType="float" />
+        <argument
+            android:name="pickupLng"
+            app:argType="float" />
+        <argument
+            android:name="dropAddress"
+            app:argType="string" />
+        <argument
+            android:name="dropLat"
+            app:argType="float" />
+        <argument
+            android:name="dropLng"
+            app:argType="float" />
+    </fragment>
+</navigation>

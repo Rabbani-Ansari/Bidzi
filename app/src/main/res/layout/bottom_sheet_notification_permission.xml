@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bottom_sheet_background">
+
+    <!-- Notification Icon -->
+    <ImageView
+        android:id="@+id/iconNotifications"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_notification" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Notifications"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_dark"
+        android:gravity="center"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stay updated with real-time ride alerts, driver arrivals, and exclusive promotions."
+        android:textSize="15sp"
+        android:textColor="@color/text_medium"
+        android:gravity="center"
+        android:lineHeight="22sp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Benefits List -->
+    <LinearLayout
+        android:id="@+id/benefitsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_background_light"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:id="@+id/tvBenefit1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✓ Instant ride status updates"
+            android:textSize="14sp"
+            android:textColor="@color/text_dark"
+            android:drawablePadding="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBenefit2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✓ Driver arrival notifications"
+            android:textSize="14sp"
+            android:textColor="@color/text_dark"
+            android:drawablePadding="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBenefit3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✓ Exclusive promotions or offers"
+            android:textSize="14sp"
+            android:textColor="@color/text_dark"
+            android:drawablePadding="8dp" />
+
+    </LinearLayout>
+
+    <!-- Enable Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEnableNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Allow Notifications"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/green"
+        app:cornerRadius="12dp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Cancel Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Not Now"
+        android:textSize="16sp"
+        android:textColor="@color/text_medium"
+        app:backgroundTint="@android:color/transparent"
+        app:strokeColor="@color/border_color"
+        app:strokeWidth="1dp"
+        app:cornerRadius="12dp"
+        style="@style/Widget.Material3.Button.OutlinedButton" />
+
+</LinearLayout>

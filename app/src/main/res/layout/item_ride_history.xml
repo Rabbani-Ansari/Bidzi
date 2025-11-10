@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg_ride_card"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp">
+
+<!-- Top Row: Destination, Fare -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/send"
+            android:contentDescription="Destination"
+            android:layout_marginEnd="8dp"
+           app:tint="@color/orange" />
+
+        <TextView
+            android:id="@+id/tvDestination"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Phoenix Mall"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_gray" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvFare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹80"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange"
+        android:layout_marginStart="12dp" />
+</LinearLayout>
+
+<!-- From Location -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="6dp">
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_location"
+        android:contentDescription="Location"
+        android:layout_marginEnd="8dp"
+        app:tint="@color/medium_gray" />
+
+    <TextView
+        android:id="@+id/tvFromLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From: MG Road Metro"
+        android:textSize="13sp"
+        android:textColor="@color/medium_gray" />
+</LinearLayout>
+
+<!-- With Passengers (Shared rides only) -->
+<LinearLayout
+    android:id="@+id/layoutWithPassengers"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="6dp"
+    android:visibility="gone">
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_shared_rides"
+        android:contentDescription="Passengers"
+        android:layout_marginEnd="8dp"
+        app:tint="@color/medium_gray" />
+
+    <TextView
+        android:id="@+id/tvWithPassengers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With: Priya, Amit"
+        android:textSize="13sp"
+        android:textColor="@color/medium_gray" />
+</LinearLayout>
+
+<!-- Date and Time -->
+<TextView
+    android:id="@+id/tvDateTime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Oct 15, 2:45 PM"
+    android:textSize="12sp"
+    android:textColor="@color/medium_gray"
+    android:layout_marginBottom="12dp" />
+
+<!-- Divider -->
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/light_gray_bg"
+    android:layout_marginBottom="12dp" />
+
+<!-- Bottom Row: Distance & Duration, Shared Badge, Rating -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/tvDistanceDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.2 km • 18 min"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_gray" />
+        </LinearLayout>
+
+        <!-- Shared Badge -->
+        <TextView
+            android:id="@+id/tvSharedBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shared"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/orange"
+            android:background="@drawable/bg_shared_badge"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Rating -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginStart="12dp">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/star"
+            android:contentDescription="Rating"
+            android:layout_marginEnd="4dp" />
+
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.8"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_gray" />
+    </LinearLayout>
+</LinearLayout>
+
+</LinearLayout>

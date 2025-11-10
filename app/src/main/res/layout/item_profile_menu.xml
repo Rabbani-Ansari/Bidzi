@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp"
+    android:gravity="center_vertical"
+    android:elevation="2dp">
+
+<!-- Icon Background -->
+<FrameLayout
+    android:layout_width="44dp"
+    android:layout_height="44dp"
+    android:background="@drawable/bg_menu_icon_circle"
+    android:layout_marginEnd="16dp">
+
+    <ImageView
+        android:id="@+id/ivMenuIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:contentDescription="Menu icon"
+        app:tint="@color/orange" />
+</FrameLayout>
+
+<!-- Title -->
+<TextView
+    android:id="@+id/tvMenuTitle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="Ride History"
+    android:textSize="16sp"
+    android:textColor="@color/dark_gray" />
+
+<!-- Arrow -->
+<ImageView
+    android:id="@+id/ivMenuArrow"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:src="@drawable/ic_arrow_right"
+    android:contentDescription="Arrow"
+    app:tint="@color/medium_gray" />
+
+</LinearLayout>

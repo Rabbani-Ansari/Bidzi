@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FFA500</color>
+    <color name="red">#F44336</color>
+    <color name="bottom_nav_active">#FFA500</color> <!-- Orange -->
+    <color name="bottom_nav_inactive">#BDBDBD</color> <!-- Gray -->
+    <color name="green">#4CAF50</color>
+    <color name="dark_gray">#212121</color>
+    <color name="medium_gray">#757575</color>
+    <color name="light_gray">#F5F5F5</color>
+    <color name="light_gray_bg">#EEEEEE</color>
+    <color name="light_medium_gray">#BDBDBD</color>
+    <color name="logout_bg">#FFEBEE</color>
+    <color name="your_status_bar_color">#848896</color>
+    <color name="route_color">#4285F4</color>
+    <!-- Add these colors for vehicle selection -->
+    <!-- Your existing primary color -->
+    <color name="primary_color">#FFA500</color>
+    <!-- Add these complementary colors for vehicle selection -->
+    <color name="light_primary">#FFF3E0</color>    <!-- Light orange background when selected -->
+    <color name="stroke_gray">#E0E0E0</color>
+
+    <color name="orange_light">#FFB74D</color>
+    <color name="orange_dark">#F57C00</color>
+
+    <color name="green_light">#A5D6A7</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_medium">#999999</color>
+    <color name="gray_dark">#666666</color>
+    <color name="background">#F5F5F5</color>
+
+    <color name="blue">#2196F3</color>
+
+    <color name="text_primary">#333333</color>
+
+
+    <color name="green_dark">#2E7D32</color>         <!-- Dark border & text -->
+
+    <!-- Red (Rejected) -->
+    <color name="red_light">#FFEBEE</color>          <!-- Very light background -->
+    <color name="red_dark">#C62828</color>           <!-- Dark border & text -->
+
+    <!-- Text Colors -->
+    <color name="text_dark">#212121</color>          <!-- Primary text -->
+    <color name="text_medium">#616161</color>        <!-- Secondary text -->
+    <color name="text_light">#9E9E9E</color>         <!-- Tertiary text -->
+
+    <!-- Other -->
+    <color name="yellow_light">#FFF9E6</color>
+
+
+
+    <!-- BidZi Brand Colors -->
+    <color name="bidzi_orange">#FF8C42</color>
+    <color name="bidzi_orange_dark">#E67528</color>
+    <color name="bidzi_orange_light">#FFB366</color>
+    <color name="light_gray_text">#9E9E9E</color>
+    <color name="gray">#9E9E9E</color>
+    <color name="notification_unread_bg">#FFF9F5</color>
+    <color name="notification_read_bg">#FFFFFF</color>
+
+    <color name="bottom_nav_selected">#DAA956</color>     <!-- iOS-style blue (primary) -->
+    <color name="bottom_nav_unselected">#8E8E93</color>   <!-- Subtle gray -->
+    <color name="bottom_nav_background">#FFFFFF</color> <!-- Pure white -->
+
+
+
+
+        <color name="driver_green">#10B981</color>
+        <color name="driver_green_bg">#D1FAE5</color>
+
+
+
+        <color name="background_light">#F9FAFB</color>
+        <color name="border_color">#E5E7EB</color>
+
+        <!-- Status Colors -->
+        <color name="error_color">#EF4444</color>
+        <color name="success_color">#10B981</color>
+        <color name="warning_color">#F59E0B</color>
+
+
+    <color name="primary_orange">#FFA500</color>
+    <color name="primary_orange_light">#FFB733</color>
+    <color name="primary_orange_dark">#FF8C00</color>
+
+    <!-- Error Colors -->
+    <color name="error_red">#FF5252</color>
+    <color name="error_red_light">#FF6B6B</color>
+
+    <!-- Cancel Button -->
+    <color name="cancel_red">#E53935</color>
+    <color name="cancel_red_dark">#C62828</color>
+
+
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#999999</color>
+
+    <color name="background_white">#FFFFFF</color>
+    <color name="background_overlay">#CC000000</color>
+
+    <!-- Border Colors -->
+    <color name="border_light">#E0E0E0</color>
+    <color name="border_medium">#CCCCCC</color>
+    <color name="divider">#E8E8E8</color>
+
+    <!-- Snackbar -->
+    <color name="snackbar_bg">#323232</color>
+    <!-- Badge Background -->
+    <color name="badge_background">#FFF3E0</color>
+
+</resources>

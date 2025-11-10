@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Vehicle Radar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #16171b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Legend */
+        .legend {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #1f2029;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 11px;
+            color: #fff;
+            z-index: 50;
+            box-shadow: 0 2px 10px #0005;
+        }
+
+        .legend-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #FFB44A;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 3px 0;
+        }
+
+        /* Main Radar */
+        .radar-map {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            background: #191a23;
+            border-radius: 50%;
+            box-shadow: 0 2px 20px #111;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Distance Rings */
+        .distance-ring {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 180, 74, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .ring-1 { width: 100px; height: 100px; }
+        .ring-2 { width: 180px; height: 180px; }
+        .ring-3 { width: 260px; height: 260px; }
+
+        .distance-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 9px;
+            color: rgba(255, 180, 74, 0.5);
+            font-weight: 500;
+        }
+
+        /* Radar pulse rings */
+        .radar-map::before,
+        .radar-map::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #10e79e;
+            border-radius: 50%;
+            opacity: 0;
+            animation: radarPulse 3s ease-out infinite;
+            pointer-events: none;
+        }
+        .radar-map::after {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes radarPulse {
+            0% {
+                width: 40px;
+                height: 40px;
+                opacity: 0.8;
+            }
+            100% {
+                width: 320px;
+                height: 320px;
+                opacity: 0;
+            }
+        }
+
+        .user-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #10e79e;
+            border: 3px solid #212a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            color: #fff;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 0 15px #10e79e;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 15px #10e79e;
+            }
+            50% {
+                box-shadow: 0 0 25px #10e79e, 0 0 35px #10e79e80;
+            }
+        }
+
+        .vehicle-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px #0005;
+            animation: fadeInIcon 0.8s ease-out backwards, float 3s ease-in-out infinite;
+            border: 3px solid;
+        }
+
+        @keyframes fadeInIcon {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .vehicle-icon:hover {
+            transform: scale(1.25) !important;
+            box-shadow: 0 4px 20px #0008;
+            z-index: 10;
+        }
+
+        /* Distance-based colors */
+        .vehicle-icon.near { border-color: #10e79e; }
+        .vehicle-icon.medium { border-color: #ffc800; }
+        .vehicle-icon.far { border-color: #ff6b35; }
+
+        .auto { background: #FFB44A; }
+        .bike { background: #ffc800; }
+        .car { background: #35c3ff; }
+
+        /* Staggered animation delays */
+        .vehicle-icon:nth-child(3) { animation-delay: 0.1s, 0s; }
+        .vehicle-icon:nth-child(4) { animation-delay: 0.2s, 0.4s; }
+        .vehicle-icon:nth-child(5) { animation-delay: 0.3s, 0.8s; }
+        .vehicle-icon:nth-child(6) { animation-delay: 0.4s, 1.2s; }
+        .vehicle-icon:nth-child(7) { animation-delay: 0.5s, 1.6s; }
+        .vehicle-icon:nth-child(8) { animation-delay: 0.6s, 2s; }
+        .vehicle-icon:nth-child(9) { animation-delay: 0.7s, 2.4s; }
+        .vehicle-icon:nth-child(10) { animation-delay: 0.8s, 2.8s; }
+
+        /* Icon placement */
+        .v-top { left: 50%; top: 8%; transform: translateX(-50%);}
+        .v-topright { left: 82%; top: 24%;}
+        .v-right { left: 88%; top: 50%; transform: translateY(-50%);}
+        .v-bottomright { left: 72%; top: 82%;}
+        .v-bottom { left: 50%; top: 92%; transform: translateX(-50%);}
+        .v-bottomleft { left: 16%; top: 82%;}
+        .v-left { left: 10%; top: 50%; transform: translateY(-50%);}
+        .v-topleft { left: 18%; top: 24%;}
+
+        /* Bottom Sheet */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 98;
+            transition: background 0.3s ease;
+        }
+        .overlay.show {
+            display: block;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .bottom-sheet {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #23232d;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            z-index: 99;
+            box-shadow: 0 -4px 24px #000a;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .bottom-sheet.show {
+            display: block;
+            transform: translateY(0);
+        }
+
+        .sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+
+        .sheet-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #333;
+        }
+
+        .sheet-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            border: 3px solid;
+        }
+
+        .sheet-title-block {
+            flex: 1;
+        }
+
+        .sheet-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .sheet-subtitle {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-available {
+            background: #10e79e33;
+            color: #10e79e;
+        }
+
+        .sheet-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            background: #2a2a35;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .star-icon {
+            color: #ffc107;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .action-primary {
+            background: #10e79e;
+            color: #fff;
+            grid-column: span 2;
+        }
+
+        .action-primary:hover {
+            background: #0dc788;
+            transform: scale(1.02);
+        }
+
+        .action-secondary {
+            background: #2a2a35;
+            color: #fff;
+        }
+
+        .action-secondary:hover {
+            background: #333340;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Legend -->
+<div class="legend">
+    <div class="legend-title">Distance</div>
+    <div class="legend-item">
+        <div style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #10e79e;"></div>
+        <span>Near (0-200m)</span>
+    </div>
+    <div class="legend-item">
+        <div style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #ffc800;"></div>
+        <span>Medium (200-500m)</span>
+    </div>
+    <div class="legend-item">
+        <div style="width: 12px; height: 12px; border-radius: 50%; border: 2px solid #ff6b35;"></div>
+        <span>Far (500m+)</span>
+    </div>
+</div>
+
+<!-- Main Radar -->
+<div class="radar-map">
+    <!-- Distance Rings -->
+    <div class="distance-ring ring-1">
+        <div class="distance-label" style="top: 0; left: 50%; transform: translate(-50%, -20px);">100m</div>
+    </div>
+    <div class="distance-ring ring-2">
+        <div class="distance-label" style="top: 0; left: 50%; transform: translate(-50%, -20px);">300m</div>
+    </div>
+    <div class="distance-ring ring-3">
+        <div class="distance-label" style="top: 0; left: 50%; transform: translate(-50%, -20px);">500m</div>
+    </div>
+
+    <div class="user-dot">You</div>
+
+    <!-- Vehicle icons -->
+    <div class="vehicle-icon auto near v-top"
+         onclick="showInfo('Rajesh Kumar', 'Auto', '150m', '2 min', '4.6', '₹50-70', 'Available')">🛺</div>
+    <div class="vehicle-icon bike medium v-topright"
+         onclick="showInfo('Amit Sharma', 'Bike', '320m', '4 min', '4.8', '₹30-40', 'Available')">🛵</div>
+    <div class="vehicle-icon car far v-right"
+         onclick="showInfo('Suresh Patel', 'Car', '580m', '6 min', '4.7', '₹100-120', 'Available')">🚗</div>
+    <div class="vehicle-icon auto medium v-bottomright"
+         onclick="showInfo('Prakash Singh', 'Auto', '280m', '3 min', '4.5', '₹45-65', 'Available')">🛺</div>
+    <div class="vehicle-icon bike near v-bottom"
+         onclick="showInfo('Vikram Joshi', 'Bike', '180m', '2 min', '4.9', '₹25-35', 'Available')">🛵</div>
+    <div class="vehicle-icon bike medium v-bottomleft"
+         onclick="showInfo('Rahul Verma', 'Bike', '350m', '4 min', '4.6', '₹35-45', 'Available')">🛵</div>
+    <div class="vehicle-icon bike near v-left"
+         onclick="showInfo('Anil Yadav', 'Bike', '120m', '1 min', '4.8', '₹20-30', 'Available')">🛵</div>
+    <div class="vehicle-icon car medium v-topleft"
+         onclick="showInfo('Deepak Gupta', 'Car', '400m', '5 min', '4.7', '₹90-110', 'Available')">🚗</div>
+</div>
+
+<!-- Bottom Sheet -->
+<div class="overlay" id="overlay" onclick="closeInfo()"></div>
+<div class="bottom-sheet" id="bottomSheet">
+    <div class="sheet-handle"></div>
+
+    <div class="sheet-header">
+        <div class="sheet-icon" id="sheetIcon"></div>
+        <div class="sheet-title-block">
+            <div class="sheet-title" id="sheetTitle"></div>
+            <div class="sheet-subtitle" id="sheetSubtitle"></div>
+        </div>
+        <div class="status-badge status-available" id="sheetStatus"></div>
+    </div>
+
+    <div class="sheet-info">
+        <div class="info-card">
+            <div class="info-label">Distance</div>
+            <div class="info-value" id="sheetDistance"></div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">ETA</div>
+            <div class="info-value" id="sheetEta"></div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Rating</div>
+            <div class="info-value"><span class="star-icon">⭐</span><span id="sheetRating"></span></div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Estimated Fare</div>
+            <div class="info-value" id="sheetFare"></div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="action-btn action-primary" onclick="bookVehicle()">
+            📍 Book Now
+        </button>
+        <button class="action-btn action-secondary" onclick="callDriver()">
+            📞 Call
+        </button>
+        <button class="action-btn action-secondary" onclick="navigate()">
+            🧭 Navigate
+        </button>
+    </div>
+</div>
+
+<script>
+    function showInfo(name, type, distance, eta, rating, fare, status) {
+        document.getElementById('sheetTitle').textContent = name;
+        document.getElementById('sheetSubtitle').textContent = type;
+        document.getElementById('sheetDistance').textContent = distance;
+        document.getElementById('sheetEta').textContent = eta;
+        document.getElementById('sheetRating').textContent = rating;
+        document.getElementById('sheetFare').textContent = fare;
+        document.getElementById('sheetStatus').textContent = status;
+
+        const iconEl = document.getElementById('sheetIcon');
+        iconEl.className = 'sheet-icon';
+
+        if (type === 'Auto') {
+            iconEl.classList.add('auto', 'near');
+            iconEl.textContent = '🛺';
+        } else if (type === 'Bike') {
+            iconEl.classList.add('bike', 'medium');
+            iconEl.textContent = '🛵';
+        } else if (type === 'Car') {
+            iconEl.classList.add('car', 'far');
+            iconEl.textContent = '🚗';
+        }
+
+        document.getElementById('overlay').classList.add('show');
+        document.getElementById('bottomSheet').classList.add('show');
+
+        // Haptic feedback
+        if (navigator.vibrate) {
+            navigator.vibrate(20);
+        }
+    }
+
+    function closeInfo() {
+        document.getElementById('overlay').classList.remove('show');
+        document.getElementById('bottomSheet').classList.remove('show');
+    }
+
+    function bookVehicle() {
+        alert('Booking vehicle... (Integrate with your booking API)');
+        closeInfo();
+    }
+
+    function callDriver() {
+        alert('Calling driver... (Integrate with tel: link)');
+    }
+
+    function navigate() {
+        alert('Opening navigation... (Integrate with maps)');
+    }
+</script>
+</body>
+</html>

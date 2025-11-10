@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Bidzi" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="android:windowLightStatusBar">true</item> <!-- false = light icons -->
+        <item name="colorPrimaryContainer">@color/orange</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryContainer">@color/white</item>
+        <item name="colorTertiary">@color/purple_500</item>
+        <item name="colorError">@color/red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnTertiary">@color/white</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="elevationOverlayEnabled">false</item>
+    </style>
+        <!-- Base App Theme -->
+        <style name="Theme.Bidzi" parent="Theme.Material3.Light.NoActionBar">
+            <item name="colorPrimary">@color/bidzi_orange</item>
+            <item name="colorOnPrimary">@color/white</item>
+            <item name="android:statusBarColor">@color/bidzi_orange</item>
+        </style>
+
+    <!-- Splash Screen Theme -->
+    <!-- Splash Screen Theme -->
+    <style name="Theme.Bidzi.Splash" parent="Theme.SplashScreen">
+        <!-- Orange background -->
+        <item name="windowSplashScreenBackground">@color/bidzi_orange</item>
+
+        <!-- Your logo - must be properly sized! -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+
+        <!-- Transparent icon background (so your logo shows properly) -->
+        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+
+        <!-- Animation duration -->
+        <item name="windowSplashScreenAnimationDuration">800</item>
+
+        <!-- Theme after splash -->
+        <item name="postSplashScreenTheme">@style/Theme.Bidzi</item>
+
+        <!-- Status/Navigation bar colors -->
+        <item name="android:statusBarColor">@color/bidzi_orange</item>
+        <item name="android:navigationBarColor">@color/bidzi_orange</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

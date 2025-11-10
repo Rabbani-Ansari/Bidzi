@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_notification_card"
+    android:padding="16dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical">
+
+<!-- Icon -->
+<FrameLayout
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:background="@drawable/bg_icon_circle"
+    android:layout_marginEnd="16dp">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:contentDescription="Notification icon"
+       app:tint="@color/orange" />
+</FrameLayout>
+
+<!-- Content -->
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Rider Joined!"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_gray"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sneha joined your shared ride to Phoenix Mall"
+        android:textSize="13sp"
+        android:textColor="@color/medium_gray"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvTimeAgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 mins ago"
+        android:textSize="11sp"
+        android:textColor="@color/light_medium_gray" />
+</LinearLayout>
+
+<!-- Unread Indicator Dot -->
+<View
+    android:id="@+id/notificationDot"
+    android:layout_width="10dp"
+    android:layout_height="10dp"
+    android:background="@drawable/circle_orange"
+    android:layout_marginStart="12dp" />
+
+</LinearLayout>

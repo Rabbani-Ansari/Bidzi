@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_notification_manage"
+    app:startDestination="@id/notificationsFragment">
+
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.bidzi.app.notification.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications">
+
+        <action
+            android:id="@+id/action_notifications_to_rideDetails"
+            app:destination="@id/rideDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_notifications_to_rideHistory"
+            app:destination="@id/rideHistoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_notifications_to_activeRide"
+            app:destination="@id/activeRideFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_notifications_to_paymentDetails"
+            app:destination="@id/paymentDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="notification_id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+
+    <!-- Ride Details Fragment -->
+    <fragment
+        android:id="@+id/rideDetailsFragment"
+        android:name="com.bidzi.app.RideDetailsFragment"
+        android:label="Ride Details"
+        tools:layout="@layout/fragment_ride_details">
+
+        <argument
+            android:name="ride_id"
+            app:argType="long" />
+    </fragment>
+
+    <!-- Ride History Fragment -->
+    <fragment
+        android:id="@+id/rideHistoryFragment"
+        android:name="com.bidzi.app.RideHistoryFragment"
+        android:label="Ride History"
+        tools:layout="@layout/fragment_ride_history">
+
+        <argument
+            android:name="ride_id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+
+    <!-- Active Ride Fragment -->
+    <fragment
+        android:id="@+id/activeRideFragment"
+        android:name="com.bidzi.app.ActiveRideFragment"
+        android:label="Active Ride"
+        tools:layout="@layout/fragment_active_ride">
+
+        <argument
+            android:name="ride_id"
+            app:argType="long" />
+    </fragment>
+
+    <!-- Payment Details Fragment -->
+    <fragment
+        android:id="@+id/paymentDetailsFragment"
+        android:name="com.bidzi.app.paymentDetailsFragment"
+        android:label="Payment Details"
+        tools:layout="@layout/fragment_payment_details">
+
+        <argument
+            android:name="ride_id"
+            app:argType="long" />
+    </fragment>
+
+</navigation>

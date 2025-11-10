@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Header with Title and Notification -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:elevation="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AutoBid"
+                android:textSize="28sp"
+                android:textColor="#FFA500"
+                android:textStyle="bold"
+                android:layout_gravity="start|center_vertical" />
+
+            <!-- Notification Icon Container at Top Right -->
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end|top">
+
+                <ImageButton
+                    android:id="@+id/notification_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_notification"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Notifications"
+                    android:layout_gravity="center" />
+
+                <!-- Red notification badge -->
+                <TextView
+                    android:id="@+id/notification_badge"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:text="2"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:background="@drawable/notification_badge_bg"
+                    android:layout_gravity="top|end" />
+            </FrameLayout>
+        </FrameLayout>
+
+        <!-- Search Box -->
+        <EditText
+            android:id="@+id/search_destination"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/search_box_bg"
+            android:hint="Where to?"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColorHint="#999999"
+            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="12dp"
+            android:elevation="2dp"
+            android:focusable="true"
+            android:clickable="true" />
+
+        <!-- Shared Rides and Schedule - Horizontal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center">
+
+            <!-- Shared Rides Button -->
+            <LinearLayout
+                android:id="@+id/shared_rides_btn"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/button_bg"
+                android:elevation="2dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_shared_rides"
+                    android:contentDescription="Shared Rides"
+                    app:tint="@color/orange" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shared Rides"
+                    android:textSize="12sp"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Schedule Button -->
+            <LinearLayout
+                android:id="@+id/schedule_btn"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/button_bg"
+                android:elevation="2dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_schedule"
+                    android:contentDescription="Schedule"
+                    app:tint="@color/orange" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Schedule"
+                    android:textSize="12sp"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Map Container with WebView and Loading Indicator (Full Width) -->
+        <FrameLayout
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:elevation="2dp">
+
+            <!-- WebView for Radar (add this in your Kotlin code) -->
+            <WebView
+                android:id="@+id/radar_webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!-- Loading Progress Bar -->
+            <ProgressBar
+                android:id="@+id/map_loading_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_gravity="top"
+                android:visibility="gone"
+                style="?attr/progressBarStyle"
+                android:indeterminate="false"
+                android:max="100"
+                android:progressTint="#FFA500"
+                android:progressBackgroundTint="#E8E8E8" />
+
+            <!-- Loading Spinner (shown while loading) -->
+            <LinearLayout
+                android:id="@+id/loading_spinner_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:background="#FFFFFF">
+
+                <ProgressBar
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    style="?attr/progressBarStyle"
+                    android:indeterminate="true"
+                    android:indeterminateTint="#FFA500" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading radar..."
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="16dp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_ride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:src="@drawable/send"
+        android:backgroundTint="#FFA500"
+        android:contentDescription="Request Ride"
+        android:elevation="6dp"
+        app:tint="@color/white" />
+</FrameLayout>
